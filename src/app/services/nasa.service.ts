@@ -20,7 +20,7 @@ export class NasaService {
 
   private apiURL = 'https://api.nasa.gov/planetary/apod';//este endpoint es para astronomy picture of the day
   //  TODO:no hacer commit con la apiKey en el codigo fuente
-  private apiKey = 'uVE2S0QqarK5pwnnE5ZLSKoftMQGxtu8QvBO7Dy8';//clave de la API de la NASA
+  private apiKey = 'DEMO_KEY';//clave de la API de la NASA
 
 
 
