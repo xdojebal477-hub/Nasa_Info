@@ -1,1 +1,29 @@
-<p>detalle works!</p>
+<div class="detail-container">
+  
+  <button class="btn-back" (click)="volver()"> &larr; Volver al listado</button>
+
+  <!-- Usamos @if para verificar si ya cargaron los datos -->
+  @if (apod(); as item) {
+    <div class="content">
+      <div class="image-section">
+        <!-- Mostramos la versión HD si existe, si no la normal -->
+        <img [src]="item.hdurl || item.url" [alt]="item.title">
+        
+        @if (item.copyright) {
+          <span class="copyright">&copy; {{ item.copyright }}</span>
+        }
+      </div>
+
+      <div class="info-section">
+        <span class="date-badge">{{ item.date | date:'fullDate' }}</span>
+        <h1>{{ item.title }}</h1>
+        <p class="description">{{ item.explanation }}</p>
+      </div>
+    </div>
+  } @else {
+    <div class="loading">
+      <p>Cargando información detallada...</p>
+    </div>
+  }
+
+</div>

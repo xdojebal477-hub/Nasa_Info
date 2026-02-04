@@ -1,1 +1,36 @@
-<p>listado works!</p>
+<div class="container">
+  
+  <!-- Contenedor para título y botón -->
+  <div class="header-actions">
+    <h2>Galería APOD</h2>
+    
+    
+    <button class="btn-reload " (click)="cargarDatos()" [disabled]="cargando()">
+      @if (cargando()) {
+      <div class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      Cargando...
+      } @else {
+        <i class="bi bi-arrow-counterclockwise"></i> Cargar nuevas fotos
+      }
+    </button>
+  </div>
+  
+  <div class="grid">
+    @for (item of apodList(); track item.date) {
+      <div class="card" (click)="verDetalle(item.date)">
+        <img [src]="item.url" [alt]="item.title">
+        <div class="card-info">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.date }}</p>
+        </div>
+      </div>
+    } @empty {
+      <!-- Si la lista está vacía y NO está cargando, es que hubo un error o no hay datos -->
+      @if (!cargando()) {
+        <p>No se encontraron imágenes.</p>
+      }
+    }
+  </div>
+</div>
