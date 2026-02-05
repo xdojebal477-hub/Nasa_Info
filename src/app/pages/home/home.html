@@ -1,6 +1,6 @@
 <div class="container mt-5">
 
-    
+
     <div class="row mb-5 text-center">
         <div class="col-lg-8 mx-auto">
         <h1 class="display-4 fw-bold">🌌 Explorador del Cosmos</h1>
@@ -16,32 +16,32 @@
         </div>
     </div>
 
-    
+
     <!-- Solo mostramos el carrusel si hay datos cargados -->
-    @if (listaApod.length > 0) {
+    @if (ListaApod().length > 0) {
         <div id="carruselNasa" class="carousel slide shadow-lg rounded mb-5" data-bs-ride="carousel">
-        
+
         <!-- Indicadores (Las rayitas de abajo) -->
         <div class="carousel-indicators">
-            @for (item of listaApod; track item.date; let i = $index) {
-            <button type="button" 
-                    data-bs-target="#carruselNasa" 
-                    [attr.data-bs-slide-to]="i" 
+            @for (item of ListaApod(); track item.date; let i = $index) {
+            <button type="button"
+                    data-bs-target="#carruselNasa"
+                    [attr.data-bs-slide-to]="i"
                     [class.active]="i === 0"
                     [attr.aria-label]="'Slide ' + (i + 1)">
             </button>
             }
         </div>
 
-        
+
         <div class="carousel-inner rounded">
-        @for (item of listaApod; track item.date; let i = $index) {
-            
+        @for (item of ListaApod(); track item.date; let i = $index) {
+
             <div class="carousel-item" [class.active]="i === 0" data-bs-interval="4000">
-            
-                <img [src]="item.url" class="d-block w-100" [alt]="item.title" 
+
+                <img [src]="item.url" class="d-block w-100" [alt]="item.title"
                         style="height: 500px; object-fit: cover;">
-                
+
                 <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
                     <h5>{{ item.title }}</h5>
                     <p>{{ item.date }}</p>

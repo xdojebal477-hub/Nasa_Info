@@ -1,1 +1,86 @@
-<p>contacto works!</p>
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="card shadow-lg border-0 contact-card">
+        <div class="card-body p-5">
+
+          <h2 class="text-center mb-4 text-white">
+            <i class="bi bi-envelope-paper-fill"></i> Contáctanos
+          </h2>
+          <p class="text-center text-muted mb-4">¿Tienes alguna duda sobre el cosmos? Escribenos.</p>
+
+          <!-- Mensaje de Éxito -->
+          @if (enviado()) {
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              <div>¡Mensaje enviado correctamente! Houston lo ha recibido.</div>
+            </div>
+          }
+
+          <!-- Formulario -->
+          <form [formGroup]="contactoForm" (ngSubmit)="enviarDatos()">
+
+            <!-- Campo Nombre -->
+            <div class="mb-3">
+              <label for="nombre" class="form-label text-white">Nombre</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Tu nombre">
+              </div>
+              <!-- Mensaje de Error -->
+              @if (contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched) {
+                <div class="text-danger small mt-1">El nombre debe tener al menos 3 letras.</div>
+              }
+            </div>
+
+            <!-- Campo Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label text-white">Email</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="nombre@ejemplo.com">
+              </div>
+              @if (contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched) {
+                <div class="text-danger small mt-1">Introduce un email válido.</div>
+              }
+            </div>
+
+            <!-- Campo Asunto -->
+            <div class="mb-3">
+              <label for="asunto" class="form-label text-white">Asunto</label>
+              <select class="form-select" id="asunto" formControlName="asunto">
+                <option value="" disabled selected>Selecciona una opción...</option>
+                <option value="duda">Duda sobre una foto</option>
+                <option value="sugerencia">Sugerencia</option>
+                <option value="otro">Otro tema</option>
+              </select>
+              @if (contactoForm.get('asunto')?.invalid && contactoForm.get('asunto')?.touched) {
+                <div class="text-danger small mt-1">Por favor selecciona un asunto.</div>
+              }
+            </div>
+
+            <!-- Campo Mensaje -->
+            <div class="mb-3">
+              <label for="mensaje" class="form-label text-white">Mensaje</label>
+              <textarea class="form-control" id="mensaje" rows="4" formControlName="mensaje" placeholder="Escribe aquí tu mensaje..."></textarea>
+              @if (contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched) {
+                <div class="text-danger small mt-1">El mensaje es muy corto (mínimo 10 caracteres).</div>
+              }
+            </div>
+
+            <!-- Botón de Envío -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="contactoForm.invalid">
+                <i class="bi bi-send-fill"></i> Enviar a Houston
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
