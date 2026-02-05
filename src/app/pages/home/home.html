@@ -1,1 +1,71 @@
-<p>home works!</p>
+<div class="container mt-5">
+
+    
+    <div class="row mb-5 text-center">
+        <div class="col-lg-8 mx-auto">
+        <h1 class="display-4 fw-bold">🌌 Explorador del Cosmos</h1>
+        <p class="lead text-muted">
+            Bienvenido a <strong>Nasa  Info</strong>, un proyecto desarrollado en Angular .
+            Aquí podrás explorar la "Imagen Astronómica del Día" (APOD) utilizando la API pública de la NASA.
+            Descubre los secretos del universo, guarda tus favoritos y contacta con nosotros.
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a routerLink="/listado" class="btn btn-primary btn-lg px-4 gap-3">Ver Galería</a>
+            <a routerLink="/contacto" class="btn btn-outline-secondary btn-lg px-4">Contacto</a>
+        </div>
+        </div>
+    </div>
+
+    
+    <!-- Solo mostramos el carrusel si hay datos cargados -->
+    @if (listaApod.length > 0) {
+        <div id="carruselNasa" class="carousel slide shadow-lg rounded mb-5" data-bs-ride="carousel">
+        
+        <!-- Indicadores (Las rayitas de abajo) -->
+        <div class="carousel-indicators">
+            @for (item of listaApod; track item.date; let i = $index) {
+            <button type="button" 
+                    data-bs-target="#carruselNasa" 
+                    [attr.data-bs-slide-to]="i" 
+                    [class.active]="i === 0"
+                    [attr.aria-label]="'Slide ' + (i + 1)">
+            </button>
+            }
+        </div>
+
+        
+        <div class="carousel-inner rounded">
+        @for (item of listaApod; track item.date; let i = $index) {
+            
+            <div class="carousel-item" [class.active]="i === 0" data-bs-interval="4000">
+            
+                <img [src]="item.url" class="d-block w-100" [alt]="item.title" 
+                        style="height: 500px; object-fit: cover;">
+                
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                    <h5>{{ item.title }}</h5>
+                    <p>{{ item.date }}</p>
+                </div>
+            </div>
+        }
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carruselNasa" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carruselNasa" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+        </button>
+    </div>
+    } @else {
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando universo...</span>
+        </div>
+        <p class="mt-2">Contactando con la NASA...</p>
+    </div>
+}
+
+</div>
